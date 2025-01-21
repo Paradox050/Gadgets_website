@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Online Shopping for Fashion & Lifestyle - Vibify</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'utils.css' %}">
+</head>
+<body>
+</head>
+<body>
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="{% url 'home' %}"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'category' 1 %}">Mobile</a></li>
+                <li><a class="nav-link" href="{% url 'category' 2 %}">Tablet</a></li>
+                <li><a class="nav-link" href="{% url 'category' 3 %}">Laptop</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="{% url 'profile' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="text">Profile</span>
+                </a>
+                <a href="{% url 'cart' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="text">Cart</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <br>
+   
+    <section id="page-header">
+        <img src="{% static 'assets/header.webp' %}" alt="Hero Image" class="header-image">
+    </section>
+
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            {% for product in products %}
+            <div class="pro">
+                <a href="{% url 'product_detail' product.id %}"> 
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+                <div class="des">
+                    <h5>{{ product.name }}</h5>
+                    <h4><i class="fa-solid fa-indian-rupee-sign"></i> {{ product.price }}</h4>
+                </div>
+            </div>
+            {% empty %}
+            <p>No products available in this category.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="footer-logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Phone:</strong>+91 8401678673</p>
+            <p><strong>Mail:</strong>electroedge.gadgets@gmail.com</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.pinterest.com/" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col">
+            <p><strong>100% Original</strong> guarantee for all products at ElectroEdge</p>
+            <p><strong>Return within 14 days</strong> of your receiving order</p>
+        </div>
+
+        <div class="copyright">
+            <p>© 2024, Akshar Patel-ElectroEdge</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+    <div class="spacer"></div>
+    
+</body>
+</html>

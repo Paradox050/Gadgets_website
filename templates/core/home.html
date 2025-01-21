@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping for Gadgets - ElectroEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'utils.css' %}">
+</head>
+<body>
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="{% url 'home' %}"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'category' 1 %}">Mobile</a></li>
+                <li><a class="nav-link" href="{% url 'category' 2 %}">Tablet</a></li>
+                <li><a class="nav-link" href="{% url 'category' 3 %}">Laptop</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="{% url 'profile' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="text">Profile</span>
+                </a>
+                <a href="{% url 'cart' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="text">Cart</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    
+        <a href="{% url 'category' 3 %}"><img src="{% static 'assets/2l.png' %}"width=100%></a>
+
+    <a href="{% url 'category' 1 %}"><img class="pics-container" src="{% static 'assets/1m.png' %}" /></a>
+
+    <a href="{% url 'category' 2 %}"><img class="pics-container" src="{% static 'assets/3t.png' %}" /></a>
+    
+    <img class="pics-container" src="{% static 'assets/img.png' %}" />
+
+    
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="footer-logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Phone:</strong>+91 8401678673</p>
+            <p><strong>Mail:</strong>electroedge.gadgets@gmail.com</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.pinterest.com/" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+            <a href="{% url 'terms_conditions' %}">Terms and Conditions</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="{% url 'signup' %}">Sign In</a>
+            <a href="{% url 'cart' %}">View Cart</a>
+            <a href="{% url 'help' %}">Help</a>
+        </div>
+
+        <div class="col">
+            <p><strong>100% Original</strong> guarantee for all products at ElectroEdge</p>
+            <p><strong>Return within 14 days</strong> of your receiving order</p>
+        </div>
+
+        <div class="copyright">
+            <p>© 2024, Akshar Patel-ElectroEdge</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+    <div class="spacer"></div>
+</body>
+</html>

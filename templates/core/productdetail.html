@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping for Gadgets - ElectroEdge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'utils.css' %}">
+</head>
+<body>
+</head>
+<body>
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="{% url 'home' %}"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'category' 1 %}">Mobile</a></li>
+                <li><a class="nav-link" href="{% url 'category' 2 %}">Tablet</a></li>
+                <li><a class="nav-link" href="{% url 'category' 3 %}">Laptop</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="{% url 'profile' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="text">Profile</span>
+                </a>
+                <a href="{% url 'cart' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="text">Cart</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <br>
+    
+    <section id="proddetails" class="section-p1">
+        <div class="single-pro-image">
+            <div class="pro">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" id="main-image">
+            </div>
+            <div class="pro-variants">
+                <h4>Available Colors:</h4>
+                <div class="color-variants">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }} Main" class="variant-image" onclick="selectColor('{{ product.image.url }}')">
+                    {% if product.color_image1 %}
+                        <img src="{{ product.color_image1.url }}" alt="{{ product.name }} Color 1" class="variant-image" onclick="selectColor('{{ product.color_image1.url }}')">
+                    {% endif %}
+                    {% if product.color_image2 %}
+                        <img src="{{ product.color_image2.url }}" alt="{{ product.name }} Color 2" class="variant-image" onclick="selectColor('{{ product.color_image2.url }}')">
+                    {% endif %}
+                    {% if product.color_image3 %}
+                        <img src="{{ product.color_image3.url }}" alt="{{ product.name }} Color 3" class="variant-image" onclick="selectColor('{{ product.color_image3.url }}')">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
+        <div class="single-pro-details">
+            <h1>{{ product.name }}</h1>
+            <h4><i class="fa-solid fa-indian-rupee-sign"></i> {{ product.price }}</h4>
+            <p>{{ product.description }}</p>
+    
+            <!-- RAM Selection (Clickable Text) -->
+            <div class="ram-selection">
+                <h4>Select RAM:</h4>
+                <div class="ram-option" data-value="4GB" onclick="selectOption('ram', '4GB')">4GB</div>
+                <div class="ram-option" data-value="8GB" onclick="selectOption('ram', '8GB')">8GB</div>
+            </div>
+            
+            <!-- Storage Selection (Clickable Text) -->
+            <div class="storage-selection">
+                <h4>Select Storage:</h4>
+                <div class="storage-option" data-value="128GB" onclick="selectOption('storage', '128GB')">128GB</div>
+                <div class="storage-option" data-value="256GB" onclick="selectOption('storage', '256GB')">256GB</div>
+                <div class="storage-option" data-value="512GB" onclick="selectOption('storage', '512GB')">512GB</div>
+                <div class="storage-option" data-value="1TB" onclick="selectOption('storage', '1TB')">1TB</div>
+            </div>
+            
+            <!-- Dynamic Stock Display Based on RAM and Storage -->
+            <div class="stock-cart-container">
+                <p class="stock-info">
+                    <strong>Stock:</strong> 
+                    <span id="stock-count"></span>
+                </p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="footer-logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Phone:</strong>+91 8401678673</p>
+            <p><strong>Mail:</strong>electroedge.gadgets@gmail.com</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.pinterest.com/" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col">
+            <p><strong>100% Original</strong> guarantee for all products at ElectroEdge</p>
+            <p><strong>Return within 14 days</strong> of your receiving order</p>
+        </div>
+
+        <div class="copyright">
+            <p>© 2024, Akshar Patel-ElectroEdge</p>
+        </div>
+    </footer>
+
+    <script type="application/json" id="stock-data">
+        {
+            "4GB_128GB": {{ product.stock_4gb_128gb|default:0 }},
+            "4GB_256GB": {{ product.stock_4gb_256gb|default:0 }},
+            "4GB_512GB": {{ product.stock_4gb_512gb|default:0 }},
+            "4GB_1TB": {{ product.stock_4gb_1tb|default:0 }},
+            "8GB_128GB": {{ product.stock_8gb_128gb|default:0 }},
+            "8GB_256GB": {{ product.stock_8gb_256gb|default:0 }},
+            "8GB_512GB": {{ product.stock_8gb_512gb|default:0 }},
+            "8GB_1TB": {{ product.stock_8gb_1tb|default:0 }}
+        }
+    </script>
+    
+    <script>
+        // Parse stock data from the JSON script element
+        const stockData = JSON.parse(document.getElementById("stock-data").textContent);
+    
+        // Function to update the main image when a color variant is clicked
+        function selectColor(imageUrl) {
+            document.getElementById("main-image").src = imageUrl;
+        }
+        function selectOption(type, value) {
+    // Remove 'selected' class from all options in this section
+    const options = document.querySelectorAll(`.${type}-selection .${type}-option`);
+    options.forEach(option => option.classList.remove('selected'));
+
+    // Add 'selected' class to the clicked option
+    const selectedOption = document.querySelector(`.${type}-selection .${type}-option[data-value="${value}"]`);
+    if (selectedOption) {
+        selectedOption.classList.add('selected');
+    }
+
+    // Update the stock display based on the selected options
+    updateStockDisplay();
+}
+    
+        // Function to update stock display based on selected RAM and Storage
+        function updateStockDisplay() {
+    // Get the selected RAM and Storage values from the .selected class
+    const ram = document.querySelector('.ram-selection .selected')?.textContent;
+    const storage = document.querySelector('.storage-selection .selected')?.textContent;
+    
+    // Check if both RAM and Storage are selected
+    if (ram && storage) {
+        // Generate the key for stockData lookup
+        const key = `${ram}_${storage}`;
+        const stockCount = stockData[key] || 0;
+        
+        // Update stock display
+        document.getElementById("stock-count").textContent = stockCount > 0 ? `Stock: ${stockCount}` : "Out of Stock";
+    } else {
+        document.getElementById("stock-count").textContent = "Please select both RAM and Storage.";
+    }
+}
+    
+        // Function to add product to cart with specs
+        function addToCart() {
+    // Get the selected RAM value from the selected option (using class 'selected')
+    const ram = document.querySelector('.ram-selection .ram-option.selected');
+    const storage = document.querySelector('.storage-selection .storage-option.selected');
+
+    // Check if both RAM and Storage are selected
+    if (!ram || !storage) {
+        alert('Please select both RAM and Storage options');
+        return; // Stop the function if RAM or Storage is not selected
+    }
+
+    // Get the text content (e.g., '4GB', '128GB')
+    const ramValue = ram.textContent.trim();
+    const storageValue = storage.textContent.trim();
+
+    // Get the main image URL for the selected color
+    const color = document.getElementById("main-image").src;
+    
+    // Extract the product ID dynamically from the page
+    const productId = '{{ product.id }}';
+    
+    // Construct the URL with query parameters (for cart addition)
+    const url = `/cart/add/${productId}/?ram=${ramValue}&storage=${storageValue}&color=${encodeURIComponent(color)}`;
+
+    // Redirect to the cart URL to add the product
+    window.location.href = url;
+}
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Vibify</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'utils.css' %}">
+</head>
+<body>
+</head>
+<body>
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="{% url 'home' %}"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'category' 1 %}">Mobile</a></li>
+                <li><a class="nav-link" href="{% url 'category' 2 %}">Tablet</a></li>
+                <li><a class="nav-link" href="{% url 'category' 3 %}">Laptop</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="{% url 'profile' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="text">Profile</span>
+                </a>
+                <a href="{% url 'cart' %}" class="icon-text-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="text">Cart</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <section class="checkout-section">
+        <h1>Checkout</h1>
+
+        <div class="cart-summary">
+            <h3>Cart Summary</h3>
+            <p>Total Items: {{ total_items }}</p>
+            <p>Total Price: <i class="fa-solid fa-indian-rupee-sign"></i> {{ total_price }}</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="checkout-form">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name" value="{{ form.full_name.value }}" required>
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required>{{ form.address.value }}</textarea>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" value="{{ form.city.value }}" required>
+
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" value="{{ form.state.value }}" required>
+
+                <label for="postal_code">Postal Code:</label>
+                <input type="text" id="postal_code" name="postal_code" value="{{ form.postal_code.value }}" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" value="{{ form.phone.value }}" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" value="{{ form.email.value }}" required>
+
+                <button type="submit">Confirm Order</button>
+            </div>
+        </form>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="#"><img src="{% static 'assets/Logo.jpg' %}" alt="Logo" class="footer-logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Phone:</strong>+91 8401678673</p>
+            <p><strong>Mail:</strong>electroedge.gadgets@gmail.com</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.pinterest.com/" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms and Conditions</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col">
+            <p><strong>100% Original</strong> guarantee for all products at ElectroEdge</p>
+            <p><strong>Return within 14 days</strong> of your receiving order</p>
+        </div>
+
+        <div class="copyright">
+            <p>© 2024, Akshar Patel-ElectroEdge</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
